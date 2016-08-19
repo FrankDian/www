@@ -1,5 +1,5 @@
 /**
- * New node file
+ * 
  */
 var express = require('express'),
 	path = require('path'),
@@ -11,7 +11,7 @@ var express = require('express'),
 	io = require('socket.io')(http);
 
 //房间信息，二维,几号房间有哪些人
-var roomInfo = {};
+var roomInfo = [];
 
 //指定静态文本存储的地方
 app.use(express.static( path.join(__dirname, 'public' ) ) );
@@ -38,23 +38,20 @@ io.on("connection" ,function(socket){//用户连接事件
 		}else if( roomInfo[roomID].indexOf(user) > -1 ){
 			socket.emit('nickExisted');
 		}else{
-		roomInfo[roomID].push(user);
-		/*
-		 * 增加
-		 */
-		socket.emit('loginSuccess');
-		
-		//通知房内人员
-//		io.to(roomID).emit('systemMsg', user + "加入了房间", roomInfo[roomID]);
-		io.to(roomID).emit('systemMsg', user , roomInfo[roomID].length , 'login' );
-		console.log(user + "加入了" + roomID);
+			roomInfo[roomID].push(user);
+			socket.emit('loginSuccess',user);
+			
+			//通知房内人员
+			io.to(roomID).emit('system', user , roomInfo[roomID], 'login' );
+			console.log(user + "加入了" + roomID);
+			//在线人数更新
+			var onlineUsers = roomInfo[roomID];
+			console.log(onlineUsers);
+			io.to(roomID).emit("online" , onlineUsers );
 		}
 		});
 	
 	//2.用户离开
-//	socket.on('leave' , function(){
-//		socket.emit('disconnect');
-//	});
 	socket.on('disconnect' , function(){
 		//update the room message
 		var index = roomInfo[roomID].indexOf(user);
@@ -64,12 +61,11 @@ io.on("connection" ,function(socket){//用户连接事件
 		socket.leave(roomID);
 		//通知房内人员
 //		io.to(roomID).emit('systemMsg', user + "退出了房间", roomInfo[roomID]);
-		socket.broadcast.emit('systemMsg', user ,roomInfo[roomID].length, 'logout');
+		socket.broadcast.emit('system', user ,roomInfo[roomID].length, 'logout');
 		console.log(user + "退出了" + roomID);
 	});
 	
 	//3.接收消息并发送到响应的房间
-//	socket.on('message',function(msg){
 	socket.on('postMsg',function(msg,color){
 		//如果用户不在此房间内则不发送消息
 		if( roomInfo[roomID].indexOf(user) === -1){
@@ -80,9 +76,9 @@ io.on("connection" ,function(socket){//用户连接事件
 //		io.to(roomID).emit( 'msg', user , msg );
 	});
 	
-	//new image get
+	//上传新照片
     socket.on('img', function(imgData, color) {
-        socket.broadcast.emit('newImg', socket.nickname, imgData, color);
+        io.to(roomID).emit('newImg', user , imgData, color);
     });
     
 });

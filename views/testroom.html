@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ChatRoom</title>
+        <title>hichat</title>
         <link rel="stylesheet" href="/css/main.css">
         <link rel="shortcut icon" href="/imgs/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/imgs/favicon.ico" type="image/x-icon">
@@ -15,7 +15,6 @@
 	        <div class="wrapper">
 	            <div class="banner">
 	                <h1>网络聊天室--{{roomID}}</h1>
-	                            欢迎您:<span id="username"></span>
 	            </div>
 	            <div id="historyMsg">
 	            </div>
@@ -43,6 +42,7 @@
 	        	</div>
 	        	<div id="OM-middle">
 	        		<h2>当前在线用户</h2> 
+	        		<div id="users">{{users}}</div>
 	        	</div>
 	        	<div id="OM-foot">
 	        		<h2>系统消息</h2>
@@ -50,17 +50,15 @@
 	        </div>
         	<!-- OnlineMsg结束 -->
         </div>
-        
         <div id="loginWrapper">
-            <p id="info">正在连接到服务器.....</p>
+            <p id="info">connecting to server...</p>
             <div id="nickWrapper">
                 <input type="text" placeHolder="nickname" id="nicknameInput" />
                 <input type="button" value="OK" id="loginBtn" />
             </div>
         </div>
-        
         <script src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="/js/jquery.js" ></script>
+        <script type="text/javascript" src="/js/jquery.js" ></script><!--改-->
         <script src="/js/main.js"></script>
     </body>
 </html>

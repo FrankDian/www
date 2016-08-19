@@ -3,50 +3,11 @@ html, body {
     background-color: #efefef;
     font-family: sans-serif;
 }
-#mainbody{
-	width: 730px;
-	height: auto;
-	background: red;
-	margin: 0 auto;
-}
-#OnlineMsg{
-	width: 200px;
-	height: 640px;
-    padding: 5px;
-    margin: 0;
-    float: right;
-    background-color: #ddd;
-}
-#OM-head{
-	margin: 30px;
-	padding: 10px;
-	background: greenyellow;
-}
-#OM-middle{
-	padding: 2px;
-	background: #FFFFFF;
-	height: 300px;
-	text-align: center;
-}
-.users{
-	margin: 0 auto;
-	color: green;
-}
-#OM-foot{
-	margin: 4px 0;
-	background: #FFFFFF;
-	padding: 2px;
-	text-align: center;
-	height: 220px;
-	
-}
-
 .wrapper {
     width: 500px;
     height: 640px;
     padding: 5px;
-    margin: 0;
-    float: left;
+    margin: 0 auto;
     background-color: #ddd;
 }
 #loginWrapper {
@@ -61,7 +22,6 @@ html, body {
     display: block;
     padding-top: 200px;
 }
-
 #nickWrapper {
     display: none;
 }
@@ -69,10 +29,10 @@ html, body {
     height: 80px;
     width: 100%;
 }
-.banner h1{
-	margin-bottom: 10px;
+.banner p {
+    float: left;
+    display: inline-block;
 }
-
 .controls {
     height: 100px;
     margin: 5px 0px;
@@ -117,6 +77,7 @@ html, body {
     max-width: 440px;
     height: 90px;
     max-height: 90px;
+    float:left;
 }
 #sendBtn {
     width: 50px;

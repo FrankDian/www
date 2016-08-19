@@ -1,3 +1,5 @@
+//作者2源代码
+
 var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
@@ -21,7 +23,7 @@ io.sockets.on('connection', function(socket) {
             socket.nickname = nickname;
             users.push(nickname);
             socket.emit('loginSuccess');
-            io.sockets.emit('system', nickname, users.length, 'login');
+            io.sockets.emit('system', nickname, users.length, roomInfo[roomID]);
         };
     });
     //user leaves
