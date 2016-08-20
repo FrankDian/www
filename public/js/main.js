@@ -12,7 +12,6 @@ $(function(){
 		document.getElementById("info").textContent = "请设置一个昵称";
 		document.getElementById("nickWrapper").style.display = "block";
 		document.getElementById("nicknameInput").focus();
-		console.log("nickWrapper 设为block");
 	});
     //昵称被占用
     socket.on('nickExisted', function() {
@@ -32,9 +31,8 @@ $(function(){
     document.getElementById("nicknameInput").addEventListener('keyup', function(e) {
         if (e.keyCode == 13) {
             var username = document.getElementById("nicknameInput").value;
-            console.log(username);
             if (username.trim().length != 0) {
-                socket.emit('login', username);/////////////////////////////////////*修改*/
+                socket.emit('login', username);
             }
         }
     }, false);
@@ -68,9 +66,7 @@ $(function(){
     	var onlineh2 = document.createElement("h2");
     	onlineh2.innerHTML = "当前在线用户";
     	container.appendChild(onlineh2);
-//  	var pes = document.getElementsByClassName("users").remove();
     	for (var i=0 ; i<onlineUsers.length ;i++) {
-    		console.log(onlineUsers[i]);
     		usersOnline = document.createElement("p");
     		usersOnline.innerHTML = "<span class='users'>"+ onlineUsers[i]  +"</span>";
     		container.appendChild(usersOnline);
@@ -99,7 +95,6 @@ $(function(){
     	if(e.keyCode == 13 && msg.trim().length != 0){
     		messageInput.value = "";
     		socket.emit("postMsg", msg , color);
-    		displayNewMsg('me' , msg, color);
     	}
     },false);
     
@@ -135,7 +130,6 @@ $(function(){
     		};
     		reader.onload = function(e){
     			this.value = "";
-//  			 console.log( e.target.result );//调试
     			socket.emit('img' , e.target.result , color);
     		}
     		reader.readAsDataURL(file);
@@ -175,8 +169,8 @@ function displayNewMsg(user , msg , color){
 	var container = document.getElementById("historyMsg"),
 		msgToDisplay = document.createElement("p"),
 		date = new Date().toTimeString().substr(0,8),
-		//将表情添加入语句
-		msg = showEmoji(msg);
+		msg = showEmoji(msg);//将表情添加入语句
+		console.log("表情已添加入语句");
 	msgToDisplay.style.color = color || "#000";
 	msgToDisplay.innerHTML = user + "<span class='timespan'>( "+ date + "):</span>" + msg;
 	container.appendChild(msgToDisplay);
@@ -185,20 +179,19 @@ function displayNewMsg(user , msg , color){
 
 //是否含有表情
 function showEmoji(msg){
-	var match,
-		result = msg,
-		reg = /\[emoji:\d+\]/g,
-		emojiIndex,
-		totalEmojiNum = document.getElementById("emojiWrapper").children.length;
-	while( match = reg.exec(msg)){
-		emojiIndex = match[0].slice(7,-1);
-		if(emojiIndex > totalEmojiNum ){//如果传递的参数大于已有的表情
-			result = result.replace(match[0] , '[X]');
-		}else{
-			result = result.replace( match[0], '<img class="emoji" src="../imgs/emoji/'+emojiIndex + '.gif />');
-		}
-	}
-	return result;
+    var match, result = msg,
+        reg = /\[emoji:\d+\]/g,
+        emojiIndex,
+        totalEmojiNum = document.getElementById('emojiWrapper').children.length;
+    while (match = reg.exec(msg)) {
+        emojiIndex = match[0].slice(7, -1);
+        if (emojiIndex > totalEmojiNum) {
+            result = result.replace(match[0], '[X]');
+        } else {
+            result = result.replace(match[0], '<img class="emoji" src="../imgs/emoji/' + emojiIndex + '.gif" />');
+        };
+    };
+    return result;
 }
 
 //初始化Emoji表情
