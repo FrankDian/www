@@ -34,7 +34,7 @@ $(function(){
             var username = document.getElementById("nicknameInput").value;
             console.log(username);
             if (username.trim().length != 0) {
-                that.socket.emit('login', username);
+                socket.emit('login', username);/////////////////////////////////////*修改*/
             }
         }
     }, false);
@@ -88,7 +88,6 @@ $(function(){
     	messageInput.focus();
     	if( msg.trim().length != 0){
     		socket.emit('postMsg' , msg ,color );
-//  		displayNewMsg('me' ,msg, color );
     		return;
     	}
     },false);
@@ -125,20 +124,19 @@ $(function(){
     //----------------发送图片------------------
     document.getElementById("sendImage").addEventListener("change" , function(){
     	if(this.files.length != 0){
+    		//将图片读取为base64格式的字符串形式
     		var file = this.files[0],
     			reader = new FileReader(),
     			color = document.getElementById("colorStyle").value;
     		if( !reader ){
-    			that.displayNewMsg('system', '你的浏览器不支持文件读取!' ,'red');
+    			displayNewMsg('system', '你的浏览器不支持文件读取!' ,'red');
     			this.value = "";
     			return;
     		};
     		reader.onload = function(e){
     			this.value = "";
-    			 console.log( e.target.result );///////////////////调试
-    			//上传照片成功事件
-    			that.socket.emit('img' , e.target.result , color);
-    			that.displayImage('me' , e.target.result , color);
+//  			 console.log( e.target.result );//调试
+    			socket.emit('img' , e.target.result , color);
     		}
     		reader.readAsDataURL(file);
     	}
@@ -178,7 +176,7 @@ function displayNewMsg(user , msg , color){
 		msgToDisplay = document.createElement("p"),
 		date = new Date().toTimeString().substr(0,8),
 		//将表情添加入语句
-		msg = this.showEmoji(msg);
+		msg = showEmoji(msg);
 	msgToDisplay.style.color = color || "#000";
 	msgToDisplay.innerHTML = user + "<span class='timespan'>( "+ date + "):</span>" + msg;
 	container.appendChild(msgToDisplay);
