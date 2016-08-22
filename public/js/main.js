@@ -150,7 +150,7 @@ $(function(){
             emojiwrapper.style.display = 'none';
         };
     });
-	//
+	//判断是否点击到了图片
 	document.getElementById("emojiWrapper").addEventListener('click' ,function(e){
 		var target = e.target;
 		if( target.nodeName.toLowerCase() == "img" ){
@@ -159,8 +159,14 @@ $(function(){
 			messageInput.value = messageInput.value + '[emoji:' +target.title + ']';
 		};
 	},false);
+	
 
 });
+
+
+
+
+
 
 
 

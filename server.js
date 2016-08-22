@@ -12,6 +12,8 @@ var express = require('express'),
 
 //房间信息，二维,几号房间有哪些人
 var roomInfo = [];
+//在线人数信息，记录每个房间有多少人
+var onlinePeople = new Array(9);
 
 //指定静态文本存储的地方
 app.use(express.static( path.join(__dirname, 'public' ) ) );
@@ -21,13 +23,12 @@ app.set("view engine","hbs");//The default engine extension to use when omitted.
  // 获取请求建立socket连接的url
   // 如: http://localhost:3000/room/room_1, roomID为room_1
 io.on("connection" ,function(socket){//用户连接事件
-	var url = socket.request.headers.referer;//socket.request.headers.cookie
+	var url = socket.request.headers.referer;
 	var splited = url.split("/");
 	var roomID = splited[splited.length -1];//房间ID
 	var user = "";//用户名
 	
 	//1.用户加入	
-//	socket.on('join' , function(username){
 	socket.on('login' , function(username){
 		user = username;
 		//更新房间信息
@@ -43,14 +44,28 @@ io.on("connection" ,function(socket){//用户连接事件
 			
 			//通知房内人员
 			io.to(roomID).emit('system', user , roomInfo[roomID], 'login' );
+			
+			//房间列表页面在线人数的更新
+			for (var i = 0;i<9;i++) {
+				var j = i+1;
+				var roomid = "room_"+j;
+				if(roomInfo[roomid] == undefined ){
+					onlinePeople[i] = 0;
+				}else{
+					onlinePeople[i] = roomInfo[roomid].length;
+				}
+			}
+			io.sockets.emit( 'onlinePeoples' , onlinePeople);
+			
+			
 			console.log(user + "加入了" + roomID);
 			//在线人数更新
 			var onlineUsers = roomInfo[roomID];
-			console.log(onlineUsers);
+//			console.log(onlineUsers);
 			io.to(roomID).emit("online" , onlineUsers );
 		}
 		});
-	
+		
 	//2.用户离开
 	socket.on('disconnect' , function(){
 		//update the room message
@@ -60,9 +75,20 @@ io.on("connection" ,function(socket){//用户连接事件
 		}
 		socket.leave(roomID);
 		//通知房内人员
-//		io.to(roomID).emit('systemMsg', user + "退出了房间", roomInfo[roomID]);
 		socket.broadcast.emit('system', user ,roomInfo[roomID].length, 'logout');
 		console.log(user + "退出了" + roomID);
+		
+		//房间列表页面在线人数的更新
+			for (var i = 0;i<9;i++) {
+				var j = i+1;
+				var roomid = "room_"+j;
+				if(roomInfo[roomid] == undefined ){
+					onlinePeople[i] = 0;
+				}else{
+					onlinePeople[i] = roomInfo[roomid].length;
+				}
+			}
+			io.sockets.emit( 'onlinePeoples' , onlinePeople);
 	});
 	
 	//3.接收消息并发送到响应的房间
@@ -73,7 +99,6 @@ io.on("connection" ,function(socket){//用户连接事件
 		}
 		console.log(user + ":" + msg);
 		io.to(roomID).emit( 'newMsg', user , msg , color );
-//		io.to(roomID).emit( 'msg', user , msg );
 	});
 	
 	//上传新照片
@@ -98,7 +123,6 @@ router.get( '/room/:roomID' , function(req,res){//同 app.get
 });
 
 // only requests to /* will be sent to our "router"
-//所有的网址请求都会通过router处理
 app.use('/',router);
 
 http.listen(8888,function(){

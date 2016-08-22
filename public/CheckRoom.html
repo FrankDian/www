@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
+		<meta charset="UTF-8">
 		<title>聊天室</title>
 		<link rel="stylesheet" href="css/css_2.css"/>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="js/jquery.js" ></script>
+		<script type="text/javascript" src="js/CheckRoom.js" ></script>
 	</head>
 	<body>
 		<div class="Wrapper">
@@ -17,7 +20,7 @@
 							<div class="mydiv ">
 								<div class="TopTitle TopTitle_x">房间1</div>
 								<h1 class="h1 h1_x">1</h1>
-							    <div class="BottomText BottomText_x">***人在线</div>
+							    <div class="BottomText BottomText_x">0人在线</div>
 							</div>
 						</a>
 						</td>
@@ -25,7 +28,7 @@
 							<div class="mydiv">
 								<div class="TopTitle">房间2</div>
 								<h1 class="h1">2</h1>
-							    <div class="BottomText">***人在线</div>
+							    <div class="BottomText">0人在线</div>
 							</div>
 						</a>
 						</td>
@@ -33,7 +36,7 @@
 							<div class="mydiv">
 								<div class="TopTitle">房间3</div>
 								<h1 class="h1">3</h1>
-							    <div class="BottomText">***人在线</div>
+							    <div class="BottomText">0人在线</div>
 							</div>
 						</a>
 						</td>
@@ -41,7 +44,7 @@
 							<div class="mydiv">
 								<div class="TopTitle">房间4</div>
 								<h1 class="h1">4</h1>
-							    <div class="BottomText">***人在线</div>
+							    <div class="BottomText">0人在线</div>
 							</div>
 						</a>
 						</td>
@@ -52,7 +55,7 @@
 							<div class="mydiv">
 								<div class="TopTitle TopTitle_y">房间5</div>
 								<h1 class="h1 h1_y">5</h1>
-							    <div class="BottomText BottomText_y">***人在线</div>
+							    <div class="BottomText BottomText_y">0人在线</div>
 							</div>
 						</a>
 						</td>
@@ -60,7 +63,7 @@
 							<div class="mydiv">
 								<div class="TopTitle">房间6</div>
 								<h1 class="h1">6</h1>
-							    <div class="BottomText">***人在线</div>
+							    <div class="BottomText">0人在线</div>
 							</div>
 						</a>
 						</td>
@@ -68,7 +71,7 @@
 							<div class="mydiv">
 								<div class="TopTitle">房间7</div>
 								<h1 class="h1">7</h1>
-							    <div class="BottomText">***人在线</div>
+							    <div class="BottomText">0人在线</div>
 							</div>
 						</a>
 					    </td>
@@ -76,7 +79,7 @@
 							<div class="mydiv">
 								<div class="TopTitle TopTitle_y TopTitle_x">房间8</div>
 								<h1 class="h1 h1_x h1_y">8</h1>
-							    <div class="BottomText BottomText_x BottomText_y">***人在线</div>
+							    <div class="BottomText BottomText_x BottomText_y">0人在线</div>
 							</div>
 						</a>
 					    </td>
@@ -87,7 +90,7 @@
 							<div class="mydiv">
 								<div class="TopTitle TopTitle_x">房间9</div>
 								<h1 class="h1 h1_x">9</h1>
-							    <div class="BottomText BottomText_x">***人在线</div>
+							    <div class="BottomText BottomText_x">0人在线</div>
 							</div>
 						</a>
 						</td>
