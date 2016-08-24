@@ -114,14 +114,22 @@ $(function(){
     //发送系统消息
     document.getElementById("area_btn").addEventListener('click',function(){
         var messageInput = document.getElementById("SystemInput"),
-            msg = messageInput.value;
-        console.log(msg);
+            msg = messageInput.value,
+            obj=document.getElementsByName("test"),//获取checkbox
+            check_val="";
         messageInput.value = "";
         messageInput.focus();
-        if( msg.trim().length != 0){
-            socket.emit('postMsg01' , msg);
-            return;
+        if(msg.trim().length != 0){
+        	for(var i=0;i<9;i++){
+        	//判断选中的checkbox
+        	if(obj[i].checked==true){
+        	check_val=obj[i].value;
+        	var roomNum=check_val;
+            socket.emit('postMsg01' , msg, roomNum );
+            }
+          }
         }
+        
     },false);
     
     /*
