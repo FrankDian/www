@@ -123,5 +123,19 @@ $(function(){
             return;
         }
     },false);
+    
+    /*
+     * by:zzj
+     * data:2016.8.24
+     * express:实现左边导航栏动态获取在线人数与给指定房间发送系统消息
+     */
+    //接收在线人数
+    socket.emit('adminLogin');
+    socket.on('onlinePeoples' , function(onlinePeople){
+		var textNums = document.getElementsByClassName("textNum");
+		for(var i = 0; i < 9 ; i++){
+			textNums.item(i).textContent = onlinePeople[i] +"人在线";
+		}
+	});
 
 });

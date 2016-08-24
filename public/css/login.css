@@ -7,7 +7,7 @@ body{
 }
 #main{
 	width: 300px;
-	margin: 40px auto;
+	margin: 180px auto;
 	height: auto;
 	font-family: "arial, helvetica, sans-serif";
 }
@@ -19,6 +19,7 @@ body{
 	border: 1px solid #ccc;
 	font-size: 18px;
 	border-radius: 5px;
+	margin: 10px auto;
 }
 #chekbox{
 	margin: 15px 0px;

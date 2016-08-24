@@ -27,6 +27,25 @@ io.on("connection" ,function(socket){//用户连接事件
 	var splited = url.split("/");
 	var roomID = splited[splited.length -1];//房间ID
 	var user = "";//用户名
+	/*
+	 * @author FrankDian
+	 * @date 2016/08/24
+	 * 修改
+	 */
+	//向后台页面发送在线总人数的更新
+	socket.on('adminLogin',function(){
+		for (var i = 0;i<9;i++) {
+			var j = i+1;
+			var roomid = "room_"+j;
+			if(roomInfo[roomid] == undefined ){
+			onlinePeople[i] = 0;
+			}else{
+				onlinePeople[i] = roomInfo[roomid].length;
+			}
+		}
+		io.sockets.emit( 'onlinePeoples' , onlinePeople);
+	});
+	
 	
 	//1.用户加入	
 	socket.on('login' , function(username){
@@ -52,7 +71,7 @@ io.on("connection" ,function(socket){//用户连接事件
 			io.to(roomID).emit('system', user , roomInfo[roomID].length, 'login' );
 		
 		
-			//房间列表页面在线人数的更新
+			//在线总人数的更新
 			for (var i = 0;i<9;i++) {
 				var j = i+1;
 				var roomid = "room_"+j;
@@ -66,7 +85,7 @@ io.on("connection" ,function(socket){//用户连接事件
 			io.sockets.emit('system01', user , roomID, roomInfo[roomID], 'login' );
 			
 			console.log(user + "加入了" + roomID);
-			//在线人数更新
+			//在线人数列表更新
 			var onlineUsers = roomInfo[roomID];
 			io.to(roomID).emit("online" , onlineUsers );
 		}
@@ -75,13 +94,26 @@ io.on("connection" ,function(socket){//用户连接事件
 	//2.用户离开
 	socket.on('disconnect' , function(){
 		//update the room message
-		var index = roomInfo[roomID].indexOf(user);
+		
+		/*
+		 * @author FrankDian 
+		 * @date 2016/08/24
+		 * 修改
+		 */
+//		var index = roomInfo[roomID].indexOf(user);
+		if(user != null ){
+			var index = roomInfo[roomID].indexOf(user);
+		}else{
+			var index = -1;
+		}
+		
+		
 		if(index != -1 ){
 			roomInfo[roomID].splice( index , 1);//删除此用户
 		}
 		socket.leave(roomID);
 		//通知房内人员
-			/*
+		/*
 		 * @author FrankDian 
 		 * @date 2016/08/24
 		 * 修改
@@ -93,16 +125,21 @@ io.on("connection" ,function(socket){//用户连接事件
 		console.log(user + "退出了" + roomID);
 		
 		//房间列表页面在线人数的更新
-			for (var i = 0;i<9;i++) {
-				var j = i+1;
-				var roomid = "room_"+j;
-				if(roomInfo[roomid] == undefined ){
-					onlinePeople[i] = 0;
-				}else{
-					onlinePeople[i] = roomInfo[roomid].length;
-				}
+		for (var i = 0;i<9;i++) {
+			var j = i+1;
+			var roomid = "room_"+j;
+			if(roomInfo[roomid] == undefined ){
+				onlinePeople[i] = 0;
+			}else{
+				onlinePeople[i] = roomInfo[roomid].length;
 			}
-			io.sockets.emit( 'onlinePeoples' , onlinePeople);
+		}
+		io.sockets.emit( 'onlinePeoples' , onlinePeople);
+		
+		//在线人数列表更新
+		var onlineUsers = roomInfo[roomID];
+		io.to(roomID).emit("online" , onlineUsers );
+		
 	});
 	
 	//3.接收消息并发送到响应的房间
@@ -114,9 +151,14 @@ io.on("connection" ,function(socket){//用户连接事件
 		console.log(user + ":" + msg);
 		io.to(roomID).emit( 'newMsg', user , msg , color );
 	});
-	socket.on('postMsg01',function(msg){
-		console.log("123");
-		io.sockets.emit('newMsg01', msg);
+	
+	/*
+	 * @author:zzj
+	 * date:2016.8.24
+	 * express:接收后台发的消息
+	 */
+	socket.on('postMsg01',function(msg,roomNum){
+		io.to(roomNum).emit('newMsg01', msg);
 	});
 	
 	//上传新照片
@@ -124,6 +166,7 @@ io.on("connection" ,function(socket){//用户连接事件
         io.to(roomID).emit('newImg', user , imgData, color);
     });
     
+   
 });
 
 	

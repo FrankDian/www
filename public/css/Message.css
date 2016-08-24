@@ -144,3 +144,15 @@ a{
     margin-top: -30px;
     cursor: pointer;
 }
+/*
+ *by:zzj
+ * data:2016.8.24
+ * express:增加在线人数样式
+ */
+.textNum{
+	float: right;
+	color: #333;
+	font-size: 16px;
+	font-family: "微软雅黑";
+	padding-right: 20px;
+}
