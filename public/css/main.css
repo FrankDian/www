@@ -122,10 +122,14 @@ html, body {
     overflow: hidden;
 }
 /*end custom file input*/
-
+/*
+ * @author FrankDian
+ * @date 2016/08/24
+ * 修改
+ */
 #messageInput {
-    width: 440px;
-    max-width: 440px;
+    width: 740px;
+    max-width: 740px;
     height: 90px;
     max-height: 90px;
 }
