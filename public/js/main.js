@@ -105,6 +105,9 @@ $(function(){
    	socket.on('newMsg', function(user, msg, color) {
         displayNewMsg(user, msg, color);
     });
+	socket.on('newMsg01', function(msg) {
+		displayNewMsg01(msg);
+	});
     socket.on('newImg', function(user, img, color) {
         displayImage(user, img, color);
     });
@@ -164,12 +167,6 @@ $(function(){
 });
 
 
-
-
-
-
-
-
 //显示新信息
 function displayNewMsg(user , msg , color){
 	var container = document.getElementById("historyMsg"),
@@ -179,6 +176,17 @@ function displayNewMsg(user , msg , color){
 		console.log("表情已添加入语句");
 	msgToDisplay.style.color = color || "#000";
 	msgToDisplay.innerHTML = user + "<span class='timespan'>( "+ date + "):</span>" + msg;
+	container.appendChild(msgToDisplay);
+	container.scrollTop = container.scrollHeight;
+};
+function displayNewMsg01(msg){
+	var container = document.getElementById("OM-foot"),
+		msgToDisplay = document.createElement("p"),
+		date = new Date().toTimeString().substr(0,8),
+		msg = showEmoji(msg);//将表情添加入语句
+	console.log("表情已添加入语句1");
+	msgToDisplay.style.color="red";
+	msgToDisplay.innerHTML = "system" + "<span class='timespan'>( "+ date + "):</span>" + msg;
 	container.appendChild(msgToDisplay);
 	container.scrollTop = container.scrollHeight;
 };

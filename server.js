@@ -56,7 +56,7 @@ io.on("connection" ,function(socket){//用户连接事件
 				}
 			}
 			io.sockets.emit( 'onlinePeoples' , onlinePeople);
-			
+			io.sockets.emit('system01', user , roomID, roomInfo[roomID], 'login' );
 			
 			console.log(user + "加入了" + roomID);
 			//在线人数更新
@@ -76,6 +76,7 @@ io.on("connection" ,function(socket){//用户连接事件
 		socket.leave(roomID);
 		//通知房内人员
 		socket.broadcast.emit('system', user ,roomInfo[roomID].length, 'logout');
+		io.sockets.emit('system01', user , roomID, roomInfo[roomID], 'logout' );
 		console.log(user + "退出了" + roomID);
 		
 		//房间列表页面在线人数的更新
@@ -99,6 +100,10 @@ io.on("connection" ,function(socket){//用户连接事件
 		}
 		console.log(user + ":" + msg);
 		io.to(roomID).emit( 'newMsg', user , msg , color );
+	});
+	socket.on('postMsg01',function(msg){
+		console.log("123");
+		io.sockets.emit('newMsg01', msg);
 	});
 	
 	//上传新照片
