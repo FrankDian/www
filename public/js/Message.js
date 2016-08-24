@@ -1,8 +1,3 @@
-
-
-/**
- * Created by zzj on 2016/8/23.
- */
 //动画方式
 function Check(){
     var li=document.getElementById("Main_left").getElementsByTagName("li");
@@ -53,8 +48,26 @@ function Input(){
     }
 }
 
+ /**
+  * 作者：FrankDian
+	时间：2016-08-24
+	描述：增加管理员登录验证
+  */
+ function checkLogin(){
+ 	var username = sessionStorage.getItem("username");
+ 	var password = sessionStorage.getItem("password");
+ 	if( username == "admin" && password == "admin" ){
+ 		alert("登陆成功");
+ 	}else{
+ 		alert("登陆失败");
+ 		location="login.html";
+ 	}
+ }
+ 
+
 //主函数，处理接收的服务器数据
 $(function(){
+	checkLogin();//登录验证
     Check();
     Input();
     //建立到服务器的socket连接
