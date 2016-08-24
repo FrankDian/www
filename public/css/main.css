@@ -3,8 +3,14 @@ html, body {
     background-color: #efefef;
     font-family: sans-serif;
 }
+/*
+ * @author FrankDian 
+ * @date 2016/08/24
+ * 修改
+ */
 #mainbody{
-	width: 730px;
+	/*width: 730px;*/
+	width: 1030px;
 	height: auto;
 	background: red;
 	margin: 0 auto;
@@ -40,9 +46,14 @@ html, body {
 	height: 220px;
 	
 }
-
+/*
+ * @author FrankDian 
+ * @date 2016/08/24
+ * 修改
+ */
 .wrapper {
-    width: 500px;
+    /*width: 500px;*/
+    width:800px;
     height: 640px;
     padding: 5px;
     margin: 0;

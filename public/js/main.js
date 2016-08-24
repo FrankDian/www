@@ -1,6 +1,4 @@
 
-
-
 $(function(){
 	var username = '';
 	var that = this;
@@ -53,12 +51,18 @@ $(function(){
     });
     //通知房内人员
     socket.on("system",function(username , roomUsers , type){
-    	
-    	var msg = username + (type == "login" ? "joined" : "left");
-    	displayNewMsg("system", msg , "red");
-    	document.getElementById("status").textContent = roomUsers.length + (roomUsers.length > 1 ? " users " : " user ") +" online";
-    	
-    })
+    	/*
+		 * @author FrankDian 
+		 * @date 2016/08/24
+		 * 修改
+		 */ 
+		//var msg = username + (type == "login" ? "joined" : "left");
+		var msg = username + (type == "login" ? "加入了房间" : "离开了房间");
+  		//displayNewMsg("system", msg , "red");
+		displayNewMsg("管理员", msg , "red");
+  	    //document.getElementById("status").textContent = roomUsers.length + (roomUsers.length > 1 ? " users " : " user ") +" online";
+    	document.getElementById("status").textContent =roomUsers +"个用户在线";
+    });
     //更新在线人员
     socket.on("online" ,function(onlineUsers){
     	var container = document.getElementById("OM-middle");
@@ -127,7 +131,13 @@ $(function(){
     			reader = new FileReader(),
     			color = document.getElementById("colorStyle").value;
     		if( !reader ){
-    			displayNewMsg('system', '你的浏览器不支持文件读取!' ,'red');
+    			/*
+    			 * @author FrankDian
+    			 * @date 2016/08/24
+    			 * 修改
+    			 */
+//  			displayNewMsg('system', '你的浏览器不支持文件读取!' ,'red');
+    			displayNewMsg('管理员', '你的浏览器不支持文件读取!' ,'red');
     			this.value = "";
     			return;
     		};
@@ -186,7 +196,13 @@ function displayNewMsg01(msg){
 		msg = showEmoji(msg);//将表情添加入语句
 	console.log("表情已添加入语句1");
 	msgToDisplay.style.color="red";
-	msgToDisplay.innerHTML = "system" + "<span class='timespan'>( "+ date + "):</span>" + msg;
+	/*
+	 * @author FrankDian
+	 * @date 2016/08/24
+	 * 修改
+	 */
+//	msgToDisplay.innerHTML = "system" + "<span class='timespan'>( "+ date + "):</span>" + msg;
+	msgToDisplay.innerHTML = "管理员" + "<span class='timespan'>( "+ date + "):</span>" + msg;
 	container.appendChild(msgToDisplay);
 	container.scrollTop = container.scrollHeight;
 };
