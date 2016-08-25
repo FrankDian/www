@@ -31,23 +31,28 @@ io.on("connection" ,function(socket){//用户连接事件
 	 * @author FrankDian
 	 * @date 2016/08/24
 	 * 修改
+	 * @date 2016/08/25
+	 * 修改后台在线用户列表bug
 	 */
-	//向后台页面发送在线总人数的更新
+	//后台在线总人数和在线人数列表的更新
 	socket.on('adminLogin',function(){
-		for (var i = 0;i<9;i++) {
+		var JsonStr = "";
+		for (var i = 0; i<9 ;i++) {
 			var j = i+1;
 			var roomid = "room_"+j;
-			if(roomInfo[roomid] == undefined ){
-			onlinePeople[i] = 0;
+			if( roomInfo[roomid] == undefined ){
+				roomInfo[roomid] = [];
+				onlinePeople[i] = 0;
 			}else{
 				onlinePeople[i] = roomInfo[roomid].length;
+				io.sockets.emit('backOnline', roomid , roomInfo[roomid]);
 			}
 		}
 		io.sockets.emit( 'onlinePeoples' , onlinePeople);
 	});
 	
 	
-	//1.用户加入	
+	//1.用户加入
 	socket.on('login' , function(username){
 		user = username;
 		//更新房间信息
@@ -61,28 +66,35 @@ io.on("connection" ,function(socket){//用户连接事件
 			roomInfo[roomID].push(user);
 			socket.emit('loginSuccess',user);
 			
-			/*
+		/*
 		 * @author FrankDian 
 		 * @date 2016/08/24
 		 * 修改
 		 */
 			//通知房内人员
-//			io.to(roomID).emit('system', user , roomInfo[roomID], 'login' );
 			io.to(roomID).emit('system', user , roomInfo[roomID].length, 'login' );
 		
 		
-			//在线总人数的更新
+			//后台在线总人数的更新
 			for (var i = 0;i<9;i++) {
 				var j = i+1;
 				var roomid = "room_"+j;
 				if(roomInfo[roomid] == undefined ){
+					roomInfo[roomid] = [];
 					onlinePeople[i] = 0;
 				}else{
 					onlinePeople[i] = roomInfo[roomid].length;
 				}
 			}
 			io.sockets.emit( 'onlinePeoples' , onlinePeople);
-			io.sockets.emit('system01', user , roomID, roomInfo[roomID], 'login' );
+			
+		/*
+		 * @author FrankDian 
+		 * @date 2016/08/25
+		 * 修改
+		 */
+		//在线人数列表的更新
+		io.sockets.emit('backOnline', roomID , roomInfo[roomID]);
 			
 			console.log(user + "加入了" + roomID);
 			//在线人数列表更新
@@ -118,23 +130,30 @@ io.on("connection" ,function(socket){//用户连接事件
 		 * @date 2016/08/24
 		 * 修改
 		 */
-//		socket.broadcast.emit('system', user ,roomInfo[roomID].length, 'logout');
 		io.to(roomID).emit('system', user , roomInfo[roomID].length, 'logout' );
 			
-		io.sockets.emit('system01', user , roomID, roomInfo[roomID], 'logout' );
 		console.log(user + "退出了" + roomID);
 		
-		//房间列表页面在线人数的更新
-		for (var i = 0;i<9;i++) {
-			var j = i+1;
-			var roomid = "room_"+j;
-			if(roomInfo[roomid] == undefined ){
-				onlinePeople[i] = 0;
-			}else{
-				onlinePeople[i] = roomInfo[roomid].length;
+		//后台在线总人数和在线人数列表的更新
+			for (var i = 0;i<9;i++) {
+				var j = i+1;
+				var roomid = "room_"+j;
+				if(roomInfo[roomid] == undefined ){
+					roomInfo[roomid] = [];
+					onlinePeople[i] = 0;
+				}else{
+					onlinePeople[i] = roomInfo[roomid].length;
+				}
 			}
-		}
 		io.sockets.emit( 'onlinePeoples' , onlinePeople);
+		/*
+		 * @author FrankDian 
+		 * @date 2016/08/25
+		 * 修改
+		 */
+		//在线人数列表的更新
+		io.sockets.emit('backOnline', roomID , roomInfo[roomID]);
+		
 		
 		//在线人数列表更新
 		var onlineUsers = roomInfo[roomID];

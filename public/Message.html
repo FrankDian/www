@@ -9,8 +9,13 @@
 	<script src="js/jquery.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="js/Message.js"></script>
+	<script>
+		function Close(){
+			alert("关闭页面");
+		}
+	</script>
 </head>
-<body>
+<body onbeforeunload="Close()">
 <div class="Div">
 	<div  id="System_Input"><a href="#">系统信息</a>
 		<a id="out">&Chi;</a>
