@@ -7,6 +7,7 @@ function Check(){
             var myIndex=parseInt(this.getAttribute("index"));
             var offset1=-920*(myIndex-index);
             animate(offset1);
+            showButton(myIndex);
         }
     }
 }
@@ -31,15 +32,28 @@ window.onscroll=function(){
 
 //系统发布消息框弹出与收回
 function Input(){
-    var myinput=document.getElementById("input_btn");
-    var out=document.getElementById("out");
-    var system_input=document.getElementById("System_Input");
+    var myinput=document.getElementById("input_btn"),
+        out=document.getElementById("out"),
+        system_input=document.getElementById("System_Input"),
+        input_button=document.getElementById("input_button"),
+        obj=document.getElementsByName("test");//获取checkbox
+        input_button.onclick=function(){
+        	input_button.value==1?input_button.value=2 : input_button.value=1;
+        	for(var i=0;i<9;i++){
+             if(input_button.value==1){
+                 obj[i].checked=false;//全不选
+                 }else{
+                 obj[i].checked=true;//全选
+               }
+            }
+        }
     myinput.onclick=function(){
-
         system_input.style.display="block";
+        document.getElementById("loginWrapper").style.display="block";
     }
     out.onclick=function(){
         system_input.style.display="none";
+        document.getElementById("loginWrapper").style.display="none";
     }
 }
 
@@ -78,13 +92,13 @@ $(function(){
     	console.log(roomID+"----"+onlineUsers);
     	var tab=document.getElementById(roomID),
     		len = onlineUsers.length;
-    	tab.innerHTML ="<tr class='tr_1'><td>用户数目</td><td>用户id</td><td>用户状态</td><td>用户房间</td><td>待定</td><td>操作</td></tr>";
+    	tab.innerHTML ="<tr class='tr_1'><td>序号</td><td>用户id</td><td>用户状态</td><td>用户房间</td></tr>";
     	console.log(len);
     	for(var i=0 ; i<len ;i++){
     		var j = i+1;
     		console.log(onlineUsers[i]);
     		tr = document.createElement("tr");
-    		tr.innerHTML = "<td>"+ len +"</td><td>"+ onlineUsers[i] +"</td><td>在线</td><td>"+ roomID +"</td><td></td><td></td>";
+    		tr.innerHTML = "<td>"+ j +"</td><td>"+ onlineUsers[i] +"</td><td>在线</td><td>"+ roomID +"</td>";
     		tab.appendChild(tr);
     	}
     });
@@ -107,7 +121,7 @@ $(function(){
             }
           }
         }
-        
+        Clear();
     },false);
     
     /*
@@ -122,9 +136,27 @@ $(function(){
     	console.log("onlinePeoples事件接收 ");
 		var textNums = document.getElementsByClassName("textNum");
 		for(var i = 0; i < 9 ; i++){
-			textNums.item(i).textContent = onlinePeople[i] +"人在线";
+			textNums.item(i).textContent = onlinePeople[i];
 		}
 	});
 	
 });
 
+//轻除
+function Clear(){
+	for(var i=0;i<9;i++){
+		console.log("成功");
+	document.getElementsByName("test")[i].checked=false;
+	}
+}
+
+function showButton(index){
+	var li=document.getElementById("Main_left").getElementsByTagName("li");
+		for(var i=0;i<li.length;i++){
+			if(li[i].className=="on"){
+				li[i].className="";
+				break;
+			}
+		}
+		li[index-1].className="on";
+	}

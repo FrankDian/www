@@ -17,65 +17,96 @@
 </head>
 <body onbeforeunload="Close()">
 <div class="Div">
-	<div  id="System_Input"><a href="#">系统信息</a>
+	<div  id="System_Input"><a href="#"></a>
 		<a id="out">&Chi;</a>
 		<h1>输入系统信息</h1>
-		<textarea class="area" id="SystemInput"></textarea>
-		<button class="area_btn" id="area_btn">点击发布</button>
+		<textarea class="area" id="SystemInput" placeholder="选择房间发送信息"></textarea>
+		<button class="area_btn" id="area_btn">发送</button><br>
 		<!--
         	作者：zzjMooc@163.com
         	时间：2016-08-24
         	描述：增加的给指定房间发消息
         -->
-		<input type="checkbox" name="test" value="room_1"/><span>1</span>
-        <input type="checkbox" name="test" value="room_2"/><span>2</span>
-        <input type="checkbox" name="test" value="room_3"/><span>3</span>
-        <input type="checkbox" name="test" value="room_4"/><span>4</span>
-        <input type="checkbox" name="test" value="room_5"/><span>5</span>
-        <input type="checkbox" name="test" value="room_6"/><span>6</span>
-        <input type="checkbox" name="test" value="room_7"/><span>7</span>
-        <input type="checkbox" name="test" value="room_8"/><span>8</span>
-        <input type="checkbox" name="test" value="room_9"/><span>9</span>
+		<div class="checkboxFour">
+  		<input type="checkbox" value="room_1" class="mybox" id="checkboxFourInput1" name="test" />
+	  	<label for="checkboxFourInput1"><span>1</span></label>
+  	    </div>
+  	    <div class="checkboxFour">
+  		<input type="checkbox" value="room_2" class="mybox" id="checkboxFourInput2" name="test" />
+	  	<label for="checkboxFourInput2"><span>2</span></label>
+  	    </div>
+  	    <div class="checkboxFour">
+  		<input type="checkbox" value="room_3" class="mybox" id="checkboxFourInput3" name="test" />
+	  	<label for="checkboxFourInput3"><span>3</span></label>
+  	    </div>
+  	    <div class="checkboxFour">
+  		<input type="checkbox" value="room_4" class="mybox" id="checkboxFourInput4" name="test" />
+	  	<label for="checkboxFourInput4"><span>4</span></label>
+  	    </div>
+  	    <div class="checkboxFour">
+  		<input type="checkbox" value="room_5" class="mybox" id="checkboxFourInput5" name="test" />
+	  	<label for="checkboxFourInput5"><span>5</span></label>
+  	    </div>
+  	    <div class="checkboxFour">
+  		<input type="checkbox" value="room_6" class="mybox" id="checkboxFourInput6" name="test" />
+	  	<label for="checkboxFourInput6"><span>6</span></label>
+  	    </div>
+  	    <div class="checkboxFour">
+  		<input type="checkbox" value="room_7" class="mybox" id="checkboxFourInput7" name="test" />
+	  	<label for="checkboxFourInput7"><span>7</span></label>
+  	    </div>
+  	    <div class="checkboxFour">
+  		<input type="checkbox" value="room_8" class="mybox" id="checkboxFourInput8" name="test" />
+	  	<label for="checkboxFourInput8"><span>8</span></label>
+  	    </div>
+  	     <div class="checkboxFour">
+  		<input type="checkbox" value="room_9" class="mybox" id="checkboxFourInput9" name="test" />
+	  	<label for="checkboxFourInput9"><span>9</span></label>
+  	    </div>
+  	     <div class="checkboxFour">
+  		<input type="checkbox" value="1" class="mybox" id="input_button" name="test" />
+	  	<label for="input_button"><span class="myspan"></span></label>
+  	    </div>
 	</div>
 	<div class="top_nav">
 		<h1>聊天室管理系统</h1>
-		<button id="input_btn" style="float: right; margin-right: 100px; margin-top:-80px; color: #333; line-height: 30px; padding: 3px 10px; cursor: pointer;"><h3>发布系统消息</h3></button>
+		<button id="input_btn"><h3>发布系统消息</h3></button>
 	</div>
 	<div class="Main">
 		<div class="Main_left" id="Main_left">
 			<table>
-				<ul>
-					<li index="1">房间一
+				<ul id="buttons">
 					<!--
                     	作者：zzjMooc@163.com
                     	时间：2016-08-24
                     	描述：增加的左侧获取在线人数
                     -->
-					<span class="textNum textNum_x">0&nbsp;人在线</span>
+					<li index="1" class="on">房间一
+					<span class="textNum textNum_x">0</span>
 					</li>
 					<li index="2">房间二
-					<span class="textNum">0&nbsp;人在线</span>
+					<span class="textNum">0</span>
 					</li>
 					<li index="3">房间三
-					<span class="textNum">0&nbsp;人在线</span>
+					<span class="textNum">0</span>
 					</li>
 					<li index="4">房间四
-					<span class="textNum">0&nbsp;人在线</span>
+					<span class="textNum">0</span>
 					</li>
 					<li index="5">房间五
-					<span class="textNum">0&nbsp;人在线</span>
+					<span class="textNum">0</span>
 					</li>
 					<li index="6">房间六
-					<span class="textNum">0&nbsp;人在线</span>
+					<span class="textNum">0</span>
 					</li>
 					<li index="7">房间七
-					<span class="textNum">0&nbsp;人在线</span>
+					<span class="textNum">0</span>
 					</li>
 					<li index="8">房间八
-					<span class="textNum">0&nbsp;人在线</span>
+					<span class="textNum">0</span>
 					</li>
 					<li index="9">房间九
-					<span class="textNum">0&nbsp;人在线</span>
+					<span class="textNum">0</span>
 					</li>
 
 				</ul>
@@ -86,25 +117,13 @@
 				<ul>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室一成员信息</h3>
-								</div>
-
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con">
 								<table id="room_1">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 								</table>
 							</div>
@@ -112,24 +131,13 @@
 					</li>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室二成员信息</h3>
-								</div>
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con">
 								<table id="room_2">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 
 								</table>
@@ -138,24 +146,13 @@
 					</li>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室三成员信息</h3>
-								</div>
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con">
 								<table  id="room_3">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 								</table>
 							</div>
@@ -163,24 +160,13 @@
 					</li>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室四成员信息</h3>
-								</div>
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con" >
 								<table id="room_4">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 								</table>
 							</div>
@@ -188,24 +174,13 @@
 					</li>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室五成员信息</h3>
-								</div>
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con">
 								<table id="room_5">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 								</table>
 							</div>
@@ -213,24 +188,13 @@
 					</li>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室六成员信息</h3>
-								</div>
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con">
 								<table id="room_6">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 								</table>
 							</div>
@@ -238,24 +202,13 @@
 					</li>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室七成员信息</h3>
-								</div>
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con">
 								<table id="room_7">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 								</table>
 							</div>
@@ -263,24 +216,13 @@
 					</li>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室八成员信息</h3>
-								</div>
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con">
 								<table id="room_8">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 								</table>
 							</div>
@@ -288,24 +230,13 @@
 					</li>
 					<li>
 						<div class="Main_right">
-							<div class="Main_top_nav">
-								<div class="Main_top_nav_left">
-									<h3>聊天室九成员信息</h3>
-								</div>
-								<div class="Main_top_nav_right">
-									<button id="btn">查询</button>
-									<input type="text" class="input"/>
-								</div>
-							</div>
 							<div class="main_con">
 								<table id="room_9">
 									<tr class="tr_1">
-										<td>用户数目</td>
+										<td>序号</td>
 										<td>用户id</td>
 										<td>用户状态</td>
 										<td>用户房间</td>
-										<td>待定</td>
-										<td>操作</td>
 									</tr>
 								</table>
 							</div>
@@ -314,6 +245,8 @@
 				</ul>
 			</div>
 		</div>
-
+        <div id="loginWrapper">
+           
+        </div>
 </body>
 </html>
