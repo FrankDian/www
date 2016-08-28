@@ -1,6 +1,6 @@
 {
   "name": "socket-chat-demo",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "based on node.js ,using socket.io and express modules !",
   "main": "server.js",
   "dependencies": {
