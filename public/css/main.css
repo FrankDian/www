@@ -52,7 +52,6 @@ html, body {
  * 修改
  */
 .wrapper {
-    /*width: 500px;*/
     width:800px;
     height: 640px;
     padding: 5px;
@@ -109,7 +108,7 @@ html, body {
     border: none;
     padding: 0;
 }
-/*custom the file input*/
+/*文件上传*/
 
 .imageLable {
     position: relative;
@@ -121,7 +120,6 @@ html, body {
     opacity: 0;
     overflow: hidden;
 }
-/*end custom file input*/
 /*
  * @author FrankDian
  * @date 2016/08/24

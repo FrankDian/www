@@ -26,7 +26,6 @@ window.onscroll=function(){
     if(document.body.scrollTop<=120){
         left_Nav.style.position="absolute";
         left_Nav.style.top="120px";
-
     }
 }
 
@@ -80,7 +79,6 @@ $(function(){
     Input();
     //建立到服务器的socket连接
     socket = io.connect();
-    //监听socket的connect事件，此事件表示连接已经建立
 	
 	/*
 	 * @author FrankDian
@@ -88,15 +86,11 @@ $(function(){
 	 * 修改后台在线用户列表bug
 	 */
     socket.on('backOnline' ,function( roomID , onlineUsers){
-    	console.log("backOnline事件接收");
-    	console.log(roomID+"----"+onlineUsers);
     	var tab=document.getElementById(roomID),
     		len = onlineUsers.length;
     	tab.innerHTML ="<tr class='tr_1'><td>序号</td><td>用户id</td><td>用户状态</td><td>用户房间</td></tr>";
-    	console.log(len);
     	for(var i=0 ; i<len ;i++){
     		var j = i+1;
-    		console.log(onlineUsers[i]);
     		tr = document.createElement("tr");
     		tr.innerHTML = "<td>"+ j +"</td><td>"+ onlineUsers[i] +"</td><td>在线</td><td>"+ roomID +"</td>";
     		tab.appendChild(tr);
@@ -142,10 +136,9 @@ $(function(){
 	
 });
 
-//轻除
+//清除
 function Clear(){
 	for(var i=0;i<9;i++){
-		console.log("成功");
 	document.getElementsByName("test")[i].checked=false;
 	}
 }

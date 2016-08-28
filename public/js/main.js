@@ -16,7 +16,7 @@ $(function(){
         document.getElementById("info").textContent = "昵称已被占用,请另外输入一个";
     });
     //给名称提交按钮添加提交事件
-    document.getElementById("loginBtn").addEventListener('click',function(){
+	document.getElementById("loginBtn").addEventListener('click',function(){
     	var username = document.getElementById("nicknameInput").value;
     	if( username.trim().length != 0 ){
     		socket.emit("login",username);
@@ -56,11 +56,8 @@ $(function(){
 		 * @date 2016/08/24
 		 * 修改
 		 */ 
-		//var msg = username + (type == "login" ? "joined" : "left");
 		var msg = username + (type == "login" ? "加入了房间" : "离开了房间");
-  		//displayNewMsg("system", msg , "red");
 		displayNewMsg("管理员", msg , "red");
-  	    //document.getElementById("status").textContent = roomUsers.length + (roomUsers.length > 1 ? " users " : " user ") +" online";
     	document.getElementById("status").textContent =roomUsers +"个用户在线";
     });
     //更新在线人员
@@ -136,7 +133,6 @@ $(function(){
     			 * @date 2016/08/24
     			 * 修改
     			 */
-//  			displayNewMsg('system', '你的浏览器不支持文件读取!' ,'red');
     			displayNewMsg('管理员', '你的浏览器不支持文件读取!' ,'red');
     			this.value = "";
     			return;
@@ -176,7 +172,6 @@ $(function(){
 
 });
 
-
 //显示新信息
 function displayNewMsg(user , msg , color){
 	var container = document.getElementById("historyMsg"),
@@ -194,20 +189,18 @@ function displayNewMsg01(msg){
 		msgToDisplay = document.createElement("p"),
 		date = new Date().toTimeString().substr(0,8),
 		msg = showEmoji(msg);//将表情添加入语句
-	console.log("表情已添加入语句1");
 	msgToDisplay.style.color="red";
 	/*
 	 * @author FrankDian
 	 * @date 2016/08/24
 	 * 修改
 	 */
-//	msgToDisplay.innerHTML = "system" + "<span class='timespan'>( "+ date + "):</span>" + msg;
 	msgToDisplay.innerHTML = "管理员" + "<span class='timespan'>( "+ date + "):</span>" + msg;
 	container.appendChild(msgToDisplay);
 	container.scrollTop = container.scrollHeight;
 };
 
-//是否含有表情
+//将消息中的表情替代符转化为表情
 function showEmoji(msg){
     var match, result = msg,
         reg = /\[emoji:\d+\]/g,

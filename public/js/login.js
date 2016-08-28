@@ -3,15 +3,20 @@
  */
 
 $(document).ready(function(){
+	//按钮变色效果
 	$(".btn").click(function(){
 		$(this).css("background-color","aquamarine");
-		setTimeout("btn()",500);
+		setTimeout(" $('.btn').css('background-color','#337AB7'); ",500);
 	});
+	
+	//输入框变色效果
+	var username = document.getElementById("username");
+	var password = document.getElementById("password");
+	inputChange(username);
+	inputChange(password);
+	
 });
-
-function btn(){
-	$(".btn").css("background-color","#337AB7");
-}
+//检查用户名密码是否为空
 function check(){
 	if( $("#username").val().length > 0 && $("#password").val().length > 0){
 		var username = $("#username").val();
@@ -24,9 +29,12 @@ function check(){
 		return false;
 	}
 }
-function change(inputs){
-	inputs.style.border="1px solid #66AFE9";
-}
-function change1(inputs){
-	inputs.style.border="1px solid #ccc";
+//输入框变色效果
+function inputChange(inputs){
+	inputs.onfocus = function(){
+		this.style.border="1px solid #66AFE9";
+	};
+	inputs.onblur = function(){
+		this.style.border="1px solid #ccc";
+	};
 }
