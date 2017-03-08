@@ -5,3 +5,4 @@
     命令行运行npm install
     模块下载成功后，运行node server启动服务器
     打开浏览器访问localhost
+管理员admin/admin
