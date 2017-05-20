@@ -4,7 +4,7 @@ $(function(){
 	var that = this;
 	//-------------------建立连接------------------
 	var socket = io.connect();
-	
+
 	//-------------------设置昵称------------------
 	socket.on("connect",function(){
 		document.getElementById("info").textContent = "请设置一个昵称";
@@ -52,12 +52,12 @@ $(function(){
     //通知房内人员
     socket.on("system",function(username , roomUsers , type){
     	/*
-		 * @author FrankDian 
+		 * @author FrankDian
 		 * @date 2016/08/24
 		 * 修改
-		 */ 
+		 */
 		var msg = username + (type == "login" ? "加入了房间" : "离开了房间");
-		displayNewMsg("管理员", msg , "red");
+		displayNewMsg("用户", msg , "red");
     	document.getElementById("status").textContent =roomUsers +"个用户在线";
     });
     //更新在线人员
@@ -74,7 +74,7 @@ $(function(){
     		container.scrollTop = container.scrollHeight;
     	}
     });
-    
+
     //----------------发送消息------------------
     //按钮发送
     document.getElementById("sendBtn").addEventListener('click',function(){
@@ -98,10 +98,10 @@ $(function(){
     		socket.emit("postMsg", msg , color);
     	}
     },false);
-    
-    
-    
-    
+
+
+
+
     //----------------接收消息------------------
    	socket.on('newMsg', function(user, msg, color) {
         displayNewMsg(user, msg, color);
@@ -112,14 +112,14 @@ $(function(){
     socket.on('newImg', function(user, img, color) {
         displayImage(user, img, color);
     });
-    
-    
+
+
     //----------------清除历史记录------------------
     document.getElementById("clearBtn").addEventListener("click" , function(){
     	document.getElementById("historyMsg").innerHTML = "";
     }, false);
-    
-    
+
+
     //----------------发送图片------------------
     document.getElementById("sendImage").addEventListener("change" , function(){
     	if(this.files.length != 0){
@@ -144,7 +144,7 @@ $(function(){
     		reader.readAsDataURL(file);
     	}
     },false);
-    
+
     //----------------选择emoji表情------------------
     initialEmoji();
     document.getElementById("emoji").addEventListener('click',function(e){
@@ -168,7 +168,7 @@ $(function(){
 			messageInput.value = messageInput.value + '[emoji:' +target.title + ']';
 		};
 	},false);
-	
+
 
 });
 
@@ -240,23 +240,3 @@ function displayImage(user , imgData , color){
 	container.appendChild(msgToDisplay);
 	container.scrollTop = container.scrollHeight;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

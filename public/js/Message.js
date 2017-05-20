@@ -66,10 +66,13 @@ function Input(){
  	var password = sessionStorage.getItem("password");
  	if( username == "admin" && password == "admin" ){
  		alert("登陆成功");
- 	}else{
- 		alert("登陆失败");
+ 	}else if(username == null || password == null){
+ 		alert("请先登录才能访问此页面");
  		location="login.html";
- 	}
+ 	}else{
+    alert("用户名或者密码错误，请重新登录");
+    location="login.html";
+  }
  }
 
 //主函数，处理接收的服务器数据
@@ -79,24 +82,25 @@ $(function(){
     Input();
     //建立到服务器的socket连接
     socket = io.connect();
-	
+
 	/*
 	 * @author FrankDian
 	 * @date 2016/08/25
 	 * 修改后台在线用户列表bug
 	 */
-    socket.on('backOnline' ,function( roomID , onlineUsers){
+   //接收后台服务器实时推送信息
+    socket.on('backOnline' ,function( roomID , onlineUsers , UserIP){
     	var tab=document.getElementById(roomID),
     		len = onlineUsers.length;
-    	tab.innerHTML ="<tr class='tr_1'><td>序号</td><td>用户id</td><td>用户状态</td><td>用户房间</td></tr>";
+    	tab.innerHTML ="<tr class='tr_1'><td>序号</td><td>用户id</td><td>用户IP</td><td>用户房间</td></tr>";
     	for(var i=0 ; i<len ;i++){
     		var j = i+1;
     		tr = document.createElement("tr");
-    		tr.innerHTML = "<td>"+ j +"</td><td>"+ onlineUsers[i] +"</td><td>在线</td><td>"+ roomID +"</td>";
+    		tr.innerHTML = "<td>"+ j +"</td><td>"+ onlineUsers[i] +"</td><td>"+ UserIP[i] +"</td><td>"+ roomID +"</td>";
     		tab.appendChild(tr);
     	}
     });
-   
+
     //发送系统消息
     document.getElementById("area_btn").addEventListener('click',function(){
         var messageInput = document.getElementById("SystemInput"),
@@ -117,23 +121,22 @@ $(function(){
         }
         Clear();
     },false);
-    
+
     /*
      * by:FrankDian
      * data:2016.8.24
      * express:实现左边导航栏动态获取在线人数bug
      */
-    //接收在线人数
+    //接收在线人数更新
     socket.emit('adminLogin');
-    
+
     socket.on('onlinePeoples' , function(onlinePeople){
-    	console.log("onlinePeoples事件接收 ");
 		var textNums = document.getElementsByClassName("textNum");
 		for(var i = 0; i < 9 ; i++){
 			textNums.item(i).textContent = onlinePeople[i];
 		}
 	});
-	
+
 });
 
 //清除
